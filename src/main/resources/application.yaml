@@ -1,7 +1,7 @@
 server:
   port: 8080
   servlet:
-    context-path: /gxcata
+    context-path: /questionnaire-investigation
 
 spring:
   datasource:
