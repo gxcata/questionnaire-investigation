@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxcata.questionnaireinvestigation.mapper.AnswerMapper">
+
+    <insert id="add">
+        insert into q_answer(answer_id, answer_value, option_id, create_time) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.answerId},
+             #{item.answerValue},
+             #{item.optionId},
+             #{item.createTime}
+            )
+        </foreach>
+    </insert>
+    <select id="queryAnswerCount" resultType="com.gxcata.questionnaireinvestigation.vo.StatisticsAnswerVO">
+        select
+            count(a.answer_value) as answer_count,
+            b.option_id,
+            b.option_value,
+            c.question_id,
+            c.question_title
+        from q_answer a
+        left join q_option b on a.option_id = b.option_id
+        left join q_question c on b.question_id = c.question_id
+        where a.option_id = #{optionId} and a.answer_value = #{answerValue}
+        group by a.option_id,a.answer_value
+    </select>
+
+</mapper>

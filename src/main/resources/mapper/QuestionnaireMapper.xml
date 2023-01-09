@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxcata.questionnaireinvestigation.mapper.QuestionnaireMapper">
+
+    <insert id="add">
+        insert into q_questionnaire(questionnaire_id, questionnaire_name, company_id, project_id, system_id, create_time)
+        values (#{questionnaireId},#{questionnaireName},#{companyId},#{projectId},#{systemId},#{createTime})
+    </insert>
+    <update id="updateQuestionnaire">
+        update q_questionnaire
+        set
+        <if test="questionnaireName != null and questionnaireName != ''">
+            questionnaire_name = #{questionnaireName},
+        </if>
+        <if test="companyId != null and companyId != ''">
+            company_id = #{companyId},
+        </if>
+        <if test="projectId != null and projectId != ''">
+            project_id = #{projectId},
+        </if>
+        <if test="systemId != null and systemId != ''">
+            system_id = #{systemId},
+        </if>
+            update_time = #{updateTime}
+        where questionnaire_id = #{questionnaireId}
+    </update>
+    <update id="generatedUrl">
+        update q_questionnaire set generated_url=#{generatedUrl}, generate_status_code=#{generateStatusCode}, update_time = #{updateTime}
+        where questionnaire_id = #{questionnaireId}
+    </update>
+    <delete id="deleteQuestionnaire">
+        delete from q_questionnaire where questionnaire_id = #{questionnaireId}
+    </delete>
+    <select id="query" resultType="com.gxcata.questionnaireinvestigation.vo.QuestionnaireVO">
+        select
+            a.questionnaire_id,
+            a.questionnaire_name,
+            a.company_id,
+            b.company_name,
+            a.project_id,
+            c.project_name,
+            a.system_id,
+            d.system_name,
+            a.generate_status_code,
+            GET_DICT_NAME(a.generate_status_code) as generate_status_name,
+            a.generated_url,
+            a.create_time
+        from
+            q_questionnaire a
+        left join c_company b on a.company_id = b.company_id
+        left join p_project c on a.project_id = c.project_id
+        left join s_system d on a.company_id = d.company_id
+        where
+            a.generate_status_code = #{generateStatusCode}
+            <if test="questionnaireName != null and questionnaireName != ''">
+                and a.questionnaire_name = #{questionnaireName}
+            </if>
+            <if test="generateStatusCode != null and generateStatusCode != ''">
+                and a.generate_status_code = #{generateStatusCode}
+            </if>
+        order by a.create_time desc
+    </select>
+    <select id="queryById" resultType="com.gxcata.questionnaireinvestigation.vo.QueryQuestionnaireByIdVO">
+        select
+            a.questionnaire_id,
+            a.questionnaire_name,
+            a.company_id,
+            b.company_name,
+            a.project_id,
+            c.project_name,
+            a.system_id,
+            d.system_name,
+            a.generate_status_code,
+            GET_DICT_NAME(a.generate_status_code) as generate_status_name,
+            a.generated_url,
+            a.create_time
+        from
+            q_questionnaire a
+        left join c_company b on a.company_id = b.company_id
+        left join p_project c on a.project_id = c.project_id
+        left join s_system d on a.company_id = d.company_id
+        where
+            questionnaire_id=#{questionnaireId}
+    </select>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxcata.questionnaireinvestigation.mapper.QuestionMapper">
+
+    <insert id="add">
+        insert into q_question(question_id, question_title, question_type_code, questionnaire_id, status_code)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.questionId},
+             #{item.questionTitle},
+             #{item.questionTypeCode},
+             #{item.questionnaireId},
+             #{item.statusCode}
+            )
+        </foreach>
+    </insert>
+    <update id="updateQuestion">
+        update q_question
+        <set>
+            <if test="questionTitle != null and questionTitle != ''">
+                question_title=#{questionTitle},
+            </if>
+            <if test="questionTypeCode != null and questionTypeCode != ''">
+                question_type_code=#{questionTypeCode},
+            </if>
+            <if test="statusCode != null and statusCode != ''">
+                status_code=#{statusCode}
+            </if>
+        </set>
+        where
+            question_id=#{questionId}
+    </update>
+    <select id="queryByQuestionnaireId" resultType="com.gxcata.questionnaireinvestigation.vo.QuestionVO">
+        select
+            question_id,
+            question_title,
+            question_type_code,
+            GET_DICT_NAME(question_type_code) as question_type_name,
+            questionnaire_id
+        from q_question
+        where
+            questionnaire_id = #{questionnaireId}
+        and
+            status_code = '10000401'
+    </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxcata.questionnaireinvestigation.mapper.CompanyMapper">
+    <insert id="add">
+        insert into
+            c_company(company_id, company_name, company_nature_code, create_time)
+        values
+            (#{companyId},#{companyName},#{companyNatureCode},#{createTime})
+    </insert>
+    <update id="updateCompany">
+        update
+            c_company
+        set
+            <if test="companyName != null and companyName != ''">
+                company_name=#{companyName},
+            </if>
+            <if test="companyNatureCode != null and companyNatureCode != ''">
+                company_nature_code=#{companyNatureCode},
+            </if>
+            update_time=#{updateTime}
+        where
+            company_id=#{companyId}
+    </update>
+    <delete id="deleteCompany">
+        delete from c_company where company_id=#{companyId}
+    </delete>
+
+    <select id="queryCompany" resultType="com.gxcata.questionnaireinvestigation.vo.CompanyVO">
+        select
+            company_id,
+            company_name,
+            company_nature_code,
+            GET_DICT_NAME(company_nature_code) as company_nature_name,
+            create_time
+        from c_company
+        <where>
+            <if test="companyName != null and companyName != ''">
+                <bind name="companyName_" value="'%'+companyName+'%'"/>
+                and company_name like #{companyName_}
+            </if>
+        </where>
+        order by create_time desc
+    </select>
+</mapper>

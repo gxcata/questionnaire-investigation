@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxcata.questionnaireinvestigation.mapper.OptionMapper">
+
+    <insert id="add">
+        insert into q_option(option_id, option_value, question_id, status_code) VALUES
+        <foreach collection="list" item="item" separator=",">
+            (
+             #{item.optionId},
+             #{item.optionValue},
+             #{item.questionId},
+             #{item.statusCode}
+            )
+        </foreach>
+    </insert>
+    <update id="updateOption">
+        update q_option
+        <set>
+            <if test="optionValue != null and optionValue != ''">
+                option_value=#{optionValue},
+            </if>
+            <if test="statusCode != null and statusCode != ''">
+                status_code=#{statusCode}
+            </if>
+        </set>
+        where option_id=#{optionId}
+    </update>
+    <select id="queryByQuestionId" resultType="com.gxcata.questionnaireinvestigation.vo.OptionVO">
+        select
+            option_id,
+            option_value,
+            question_id
+        from q_option
+        where question_id = #{questionId}
+    </select>
+</mapper>

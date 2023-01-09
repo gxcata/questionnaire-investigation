@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxcata.questionnaireinvestigation.mapper.UserMapper">
+    <update id="updateUserByPhone">
+        update
+            c_user
+        set
+            <if test="userName != null and userName != ''">
+                user_name=#{userName},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="salt != null and salt != ''">
+                salt=#{salt},
+            </if>
+                update_time=#{updateTime}
+        where phone_number=#{phoneNumber}
+    </update>
+    <delete id="deleteUserByPhone">
+        delete from c_user where phone_number=#{phoneNumber}
+    </delete>
+
+
+    <select id="queryUserByPhone" resultType="com.gxcata.questionnaireinvestigation.entity.CUser">
+        select * from c_user where phone_number=#{phone} limit 1
+    </select>
+</mapper>
