@@ -5,6 +5,7 @@ package com.gxcata.questionnaireinvestigation.common.aop;
  * @date 2022年06月23日 14:40
  */
 
+import com.gxcata.questionnaireinvestigation.common.exception.RRException;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -39,7 +40,7 @@ public class WebLogAspect {
      * 前置通知 请求方法之前做拦截
      */
     @Before("webLog()")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
+    public void doBefore(JoinPoint joinPoint) throws RRException {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
@@ -58,7 +59,7 @@ public class WebLogAspect {
      * 目标方法请求之后 打印（响应）信息
      */
     @AfterReturning(returning = "ret", pointcut = "webLog()")
-    public void doAfterReturning(Object ret) throws Throwable {
+    public void doAfterReturning(Object ret) throws RRException {
         // 处理完请求，返回内容
         log.info("RESPONSE : " + ret);
     }

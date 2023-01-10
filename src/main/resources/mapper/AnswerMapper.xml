@@ -14,18 +14,5 @@
             )
         </foreach>
     </insert>
-    <select id="queryAnswerCount" resultType="com.gxcata.questionnaireinvestigation.vo.StatisticsAnswerVO">
-        select
-            count(a.answer_value) as answer_count,
-            b.option_id,
-            b.option_value,
-            c.question_id,
-            c.question_title
-        from q_answer a
-        left join q_option b on a.option_id = b.option_id
-        left join q_question c on b.question_id = c.question_id
-        where a.option_id = #{optionId} and a.answer_value = #{answerValue}
-        group by a.option_id,a.answer_value
-    </select>
 
 </mapper>

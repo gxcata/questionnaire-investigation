@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author wanghailun
@@ -16,7 +15,10 @@ public class StatisticsQuestionnaireVO {
     @ApiModelProperty(value = "问卷id")
     private String questionnaireId;
 
-    @ApiModelProperty(value = "问卷统计list")
-    private List<StatisticsAnswerVO> list;
+    @ApiModelProperty(value = "问卷名称")
+    private String questionnaireName;
+
+    @ApiModelProperty(value = "问题list")
+    private List<StatisticsQuestionVO> list;
 
 }

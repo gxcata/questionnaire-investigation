@@ -245,8 +245,6 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
     public StatisticsQuestionnaireVO statistics(StatisticsQuestionnairePO statisticsQuestionnairePO) {
         //返回的vo
         StatisticsQuestionnaireVO statisticsQuestionnaireVO = new StatisticsQuestionnaireVO();
-        //返回的list
-        List<StatisticsAnswerVO> list = new ArrayList<>();
 
         //查询po
         QueryQuestionnaireByIdPO queryQuestionnaireByIdPO = new QueryQuestionnaireByIdPO();
@@ -256,6 +254,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         QueryQuestionnaireByIdVO queryQuestionnaireByIdVO = questionnaireService.queryById(queryQuestionnaireByIdPO);
         //添加返回id
         statisticsQuestionnaireVO.setQuestionnaireId(queryQuestionnaireByIdVO.getQuestionnaireId());
+        //添加返回name
+        statisticsQuestionnaireVO.setQuestionnaireName(queryQuestionnaireByIdVO.getQuestionnaireName());
         //获取查询问题数组
         List<QuestionVO> questionList = queryQuestionnaireByIdVO.getList();
         List<QAnswer> answerList = new ArrayList();
@@ -277,19 +277,34 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
                 }
             }
         }
-
         if(CollUtil.isNotEmpty(answerList)){
-            for(QAnswer answer : answerList){
-                //
-                QueryAnswerCountPO queryAnswerCountPO = new QueryAnswerCountPO();
-                queryAnswerCountPO.setOptionId(answer.getOptionId());
-                queryAnswerCountPO.setAnswerValue(answer.getAnswerValue());
-                list.addAll(answerMapper.queryAnswerCount(queryAnswerCountPO));
+            List<StatisticsQuestionVO> statisticsQuestionList = new ArrayList<>();
+            for(QuestionVO questionVO : questionList){
+                StatisticsQuestionVO statisticsQuestionVO = new StatisticsQuestionVO();
+                statisticsQuestionVO.setQuestionId(questionVO.getQuestionId());
+                statisticsQuestionVO.setQuestionTitle(questionVO.getQuestionTitle());
+                List<OptionVO> optionList = questionVO.getList();
+                List<StatisticsOptionVO> statisticsOptionList = new ArrayList<>();
+                if(CollUtil.isNotEmpty(optionList)){
+                    for(OptionVO optionVO : optionList){
+                        StatisticsOptionVO statisticsOptionVO = new StatisticsOptionVO();
+                        statisticsOptionVO.setOptionId(optionVO.getOptionId());
+                        statisticsOptionVO.setOptionValue(optionVO.getOptionValue());
+                        List<String> collect = answerList.stream().map(QAnswer::getOptionId).collect(Collectors.toList());
+                        Integer count = 0;
+                        for(String id : collect){
+                            if(optionVO.getOptionId().equals(id)){
+                                count++;
+                            }
+                        }
+                        statisticsOptionVO.setAnswerCount(count);
+                        statisticsOptionList.add(statisticsOptionVO);
+                    }
+                }
+                statisticsQuestionVO.setList(statisticsOptionList);
+                statisticsQuestionList.add(statisticsQuestionVO);
             }
-            List<StatisticsAnswerVO> newList = new ArrayList<>();
-            HashSet<StatisticsAnswerVO> set = new HashSet<>(list);
-            newList.addAll(set);
-            statisticsQuestionnaireVO.setList(newList);
+            statisticsQuestionnaireVO.setList(statisticsQuestionList);
         }
         return statisticsQuestionnaireVO;
     }

@@ -42,12 +42,12 @@ public class UserServiceImpl implements UserService {
         LoginVO loginVO = new LoginVO();
         CUser cUser = userService.queryUserByPhone(loginPO.getPhoneNumber());
         if(cUser == null && ObjectUtil.isEmpty(cUser)){
-            throw new RRException("账号不存在！");
+            throw new RRException(ErrorCodeEnum.ERROR_503);
         }
         //解密
         String pwd = JasyptUtil.decrypt(cUser.getSalt(), cUser.getPassword());
         if(!loginPO.getPassword().equals(pwd)){
-            throw new RRException("密码不正确！");
+            throw new RRException(ErrorCodeEnum.ERROR_503);
         }
         BeanUtil.copyProperties(cUser,loginVO);
         String token = TokenUtils.sign(cUser);

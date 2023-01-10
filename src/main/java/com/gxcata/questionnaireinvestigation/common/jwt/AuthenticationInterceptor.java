@@ -58,7 +58,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 // 执行认证
                 if (token == null) {
                     //"无token，请重新登录"!
-                    throw new RRException(ErrorCodeEnum.ERROR_TOKEN_MISS);
+                    throw new RRException(ErrorCodeEnum.ERROR_TOKEN);
                 }
                 // 获取 token 中的 phone
                 String phone;
