@@ -1,9 +1,7 @@
 package com.gxcata.questionnaireinvestigation.service;
 
-import com.gxcata.questionnaireinvestigation.po.AddSystemPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteSystemPO;
-import com.gxcata.questionnaireinvestigation.po.SystemPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateSystemPO;
+import com.gxcata.questionnaireinvestigation.po.*;
+import com.gxcata.questionnaireinvestigation.vo.QuerySystemByIdVO;
 import com.gxcata.questionnaireinvestigation.vo.SystemVO;
 
 import java.util.List;
@@ -41,4 +39,11 @@ public interface SystemService {
      * @return
      */
     Boolean deleteSystem(DeleteSystemPO deleteSystemPO);
+
+    /**
+     * 根据id查询系统信息
+     * @param querySystemByIdPO
+     * @return
+     */
+    QuerySystemByIdVO queryById(QuerySystemByIdPO querySystemByIdPO);
 }

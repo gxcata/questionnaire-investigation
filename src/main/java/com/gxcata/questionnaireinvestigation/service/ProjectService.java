@@ -1,10 +1,8 @@
 package com.gxcata.questionnaireinvestigation.service;
 
-import com.gxcata.questionnaireinvestigation.po.AddProjectPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteProjectPO;
-import com.gxcata.questionnaireinvestigation.po.ProjectPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateProjectPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.vo.ProjectVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryProjectByIdVO;
 
 import java.util.List;
 
@@ -41,4 +39,11 @@ public interface ProjectService {
      * @return
      */
     Boolean deleteProject(DeleteProjectPO deleteProjectPO);
+
+    /**
+     * 根据id查询项目信息
+     * @param queryProjectByIdPO
+     * @return
+     */
+    QueryProjectByIdVO queryById(QueryProjectByIdPO queryProjectByIdPO);
 }

@@ -2,12 +2,10 @@ package com.gxcata.questionnaireinvestigation.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.gxcata.questionnaireinvestigation.mapper.CompanyMapper;
-import com.gxcata.questionnaireinvestigation.po.AddCompanyPO;
-import com.gxcata.questionnaireinvestigation.po.CompanyPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteCompanyPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateCompanyPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.service.CompanyService;
 import com.gxcata.questionnaireinvestigation.vo.CompanyVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryCompanyByIdVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,5 +43,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public Boolean deleteCompany(DeleteCompanyPO deleteCompanyPO) {
         return companyMapper.deleteCompany(deleteCompanyPO) > 0;
+    }
+
+    @Override
+    public QueryCompanyByIdVO queryCompanyById(QueryCompanyByIdPO queryCompanyByIdPO) {
+        return companyMapper.queryCompanyById(queryCompanyByIdPO);
     }
 }

@@ -2,11 +2,9 @@ package com.gxcata.questionnaireinvestigation.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxcata.questionnaireinvestigation.entity.PProject;
-import com.gxcata.questionnaireinvestigation.po.AddProjectPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteProjectPO;
-import com.gxcata.questionnaireinvestigation.po.ProjectPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateProjectPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.vo.ProjectVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryProjectByIdVO;
 import org.mapstruct.Mapper;
 
 import java.util.List;
@@ -45,4 +43,11 @@ public interface ProjectMapper extends BaseMapper<PProject> {
      * @return
      */
     int deleteProject(DeleteProjectPO deleteProjectPO);
+
+    /**
+     * 根据id查询项目信息
+     * @param queryProjectByIdPO
+     * @return
+     */
+    QueryProjectByIdVO queryById(QueryProjectByIdPO queryProjectByIdPO);
 }

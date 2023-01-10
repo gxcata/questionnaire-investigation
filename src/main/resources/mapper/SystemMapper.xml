@@ -24,4 +24,10 @@
     <select id="querySystemById" resultType="com.gxcata.questionnaireinvestigation.vo.SystemVO">
         select * from s_system where project_id=#{projectId} order by create_time desc
     </select>
+    <select id="queryById" resultType="com.gxcata.questionnaireinvestigation.vo.QuerySystemByIdVO">
+        select
+            *
+        from s_system
+        where system_id = #{systemId}
+    </select>
 </mapper>

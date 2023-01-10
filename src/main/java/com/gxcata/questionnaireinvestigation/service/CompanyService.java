@@ -1,10 +1,8 @@
 package com.gxcata.questionnaireinvestigation.service;
 
-import com.gxcata.questionnaireinvestigation.po.AddCompanyPO;
-import com.gxcata.questionnaireinvestigation.po.CompanyPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteCompanyPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateCompanyPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.vo.CompanyVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryCompanyByIdVO;
 
 import java.util.List;
 
@@ -40,4 +38,11 @@ public interface CompanyService {
      * @return
      */
     Boolean deleteCompany(DeleteCompanyPO deleteCompanyPO);
+
+    /**
+     * 根据单位id查询单位信息
+     * @param queryCompanyByIdPO
+     * @return
+     */
+    QueryCompanyByIdVO queryCompanyById(QueryCompanyByIdPO queryCompanyByIdPO);
 }

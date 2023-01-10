@@ -2,11 +2,9 @@ package com.gxcata.questionnaireinvestigation.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.gxcata.questionnaireinvestigation.mapper.SystemMapper;
-import com.gxcata.questionnaireinvestigation.po.AddSystemPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteSystemPO;
-import com.gxcata.questionnaireinvestigation.po.SystemPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateSystemPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.service.SystemService;
+import com.gxcata.questionnaireinvestigation.vo.QuerySystemByIdVO;
 import com.gxcata.questionnaireinvestigation.vo.SystemVO;
 import org.springframework.stereotype.Service;
 
@@ -45,5 +43,10 @@ public class SystemServiceImpl implements SystemService {
     @Override
     public Boolean deleteSystem(DeleteSystemPO deleteSystemPO) {
         return systemMapper.deleteSystem(deleteSystemPO) > 0;
+    }
+
+    @Override
+    public QuerySystemByIdVO queryById(QuerySystemByIdPO querySystemByIdPO) {
+        return systemMapper.queryById(querySystemByIdPO);
     }
 }

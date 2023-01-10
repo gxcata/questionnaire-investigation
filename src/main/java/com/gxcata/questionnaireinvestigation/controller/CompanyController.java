@@ -3,12 +3,10 @@ package com.gxcata.questionnaireinvestigation.controller;
 import com.gxcata.questionnaireinvestigation.common.jwt.UserLoginToken;
 import com.gxcata.questionnaireinvestigation.common.web.domain.Result;
 import com.gxcata.questionnaireinvestigation.common.web.page.BaseController;
-import com.gxcata.questionnaireinvestigation.po.AddCompanyPO;
-import com.gxcata.questionnaireinvestigation.po.CompanyPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteCompanyPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateCompanyPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.service.CompanyService;
 import com.gxcata.questionnaireinvestigation.vo.CompanyVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryCompanyByIdVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +59,13 @@ public class CompanyController extends BaseController {
     @ApiOperation(value = "删除单位")
     public Result<Boolean> deleteCompany(@RequestBody @Valid DeleteCompanyPO deleteCompanyPO) {
         return Result.ok(companyService.deleteCompany(deleteCompanyPO));
+    }
+
+    @UserLoginToken
+    @PostMapping("/queryCompanyById")
+    @ApiOperation(value = "根据单位id查询单位信息")
+    public Result<QueryCompanyByIdVO> queryCompanyById(@RequestBody @Valid QueryCompanyByIdPO queryCompanyByIdPO) {
+        return Result.ok(companyService.queryCompanyById(queryCompanyByIdPO));
     }
 
 }

@@ -23,4 +23,10 @@
     <select id="queryProjectById" resultType="com.gxcata.questionnaireinvestigation.vo.ProjectVO">
         select * from p_project where company_id=#{companyId} order by create_time desc
     </select>
+    <select id="queryById" resultType="com.gxcata.questionnaireinvestigation.vo.QueryProjectByIdVO">
+        select
+            *
+        from p_project
+        where project_id = #{projectId}
+    </select>
 </mapper>

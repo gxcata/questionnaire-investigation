@@ -2,10 +2,8 @@ package com.gxcata.questionnaireinvestigation.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxcata.questionnaireinvestigation.entity.SSystem;
-import com.gxcata.questionnaireinvestigation.po.AddSystemPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteSystemPO;
-import com.gxcata.questionnaireinvestigation.po.SystemPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateSystemPO;
+import com.gxcata.questionnaireinvestigation.po.*;
+import com.gxcata.questionnaireinvestigation.vo.QuerySystemByIdVO;
 import com.gxcata.questionnaireinvestigation.vo.SystemVO;
 import org.mapstruct.Mapper;
 
@@ -45,4 +43,11 @@ public interface SystemMapper extends BaseMapper<SSystem> {
      * @return
      */
     int deleteSystem(DeleteSystemPO deleteSystemPO);
+
+    /**
+     * 根据id查询系统信息
+     * @param querySystemByIdPO
+     * @return
+     */
+    QuerySystemByIdVO queryById(QuerySystemByIdPO querySystemByIdPO);
 }

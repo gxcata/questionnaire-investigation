@@ -3,12 +3,10 @@ package com.gxcata.questionnaireinvestigation.controller;
 import com.gxcata.questionnaireinvestigation.common.jwt.UserLoginToken;
 import com.gxcata.questionnaireinvestigation.common.web.domain.Result;
 import com.gxcata.questionnaireinvestigation.common.web.page.BaseController;
-import com.gxcata.questionnaireinvestigation.po.AddProjectPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteProjectPO;
-import com.gxcata.questionnaireinvestigation.po.ProjectPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateProjectPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.service.ProjectService;
 import com.gxcata.questionnaireinvestigation.vo.ProjectVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryProjectByIdVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +59,13 @@ public class ProjectController extends BaseController {
     @ApiOperation(value = "删除项目")
     public Result<Boolean> deleteProject(@RequestBody @Valid DeleteProjectPO deleteProjectPO) {
         return Result.ok(projectService.deleteProject(deleteProjectPO));
+    }
+
+    @UserLoginToken
+    @PostMapping("/queryById")
+    @ApiOperation(value = "根据id查询项目信息")
+    public Result<QueryProjectByIdVO> queryById(@RequestBody @Valid QueryProjectByIdPO queryProjectByIdPO) {
+        return Result.ok(projectService.queryById(queryProjectByIdPO));
     }
 
 

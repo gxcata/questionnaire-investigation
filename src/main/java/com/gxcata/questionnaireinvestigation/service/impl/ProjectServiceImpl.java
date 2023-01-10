@@ -2,12 +2,10 @@ package com.gxcata.questionnaireinvestigation.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.gxcata.questionnaireinvestigation.mapper.ProjectMapper;
-import com.gxcata.questionnaireinvestigation.po.AddProjectPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteProjectPO;
-import com.gxcata.questionnaireinvestigation.po.ProjectPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateProjectPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.service.ProjectService;
 import com.gxcata.questionnaireinvestigation.vo.ProjectVO;
+import com.gxcata.questionnaireinvestigation.vo.QueryProjectByIdVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -45,5 +43,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Boolean deleteProject(DeleteProjectPO deleteProjectPO) {
         return projectMapper.deleteProject(deleteProjectPO) > 0;
+    }
+
+    @Override
+    public QueryProjectByIdVO queryById(QueryProjectByIdPO queryProjectByIdPO) {
+        return projectMapper.queryById(queryProjectByIdPO);
     }
 }

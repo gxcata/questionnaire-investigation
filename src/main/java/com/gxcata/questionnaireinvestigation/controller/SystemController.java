@@ -3,11 +3,9 @@ package com.gxcata.questionnaireinvestigation.controller;
 import com.gxcata.questionnaireinvestigation.common.jwt.UserLoginToken;
 import com.gxcata.questionnaireinvestigation.common.web.domain.Result;
 import com.gxcata.questionnaireinvestigation.common.web.page.BaseController;
-import com.gxcata.questionnaireinvestigation.po.AddSystemPO;
-import com.gxcata.questionnaireinvestigation.po.DeleteSystemPO;
-import com.gxcata.questionnaireinvestigation.po.SystemPO;
-import com.gxcata.questionnaireinvestigation.po.UpdateSystemPO;
+import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.service.SystemService;
+import com.gxcata.questionnaireinvestigation.vo.QuerySystemByIdVO;
 import com.gxcata.questionnaireinvestigation.vo.SystemVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -63,5 +61,11 @@ public class SystemController extends BaseController {
         return Result.ok(systemService.deleteSystem(deleteSystemPO));
     }
 
+    @UserLoginToken
+    @PostMapping("/queryById")
+    @ApiOperation(value = "根据id查询系统信息")
+    public Result<QuerySystemByIdVO> queryById(@RequestBody @Valid QuerySystemByIdPO querySystemByIdPO) {
+        return Result.ok(systemService.queryById(querySystemByIdPO));
+    }
 
 }

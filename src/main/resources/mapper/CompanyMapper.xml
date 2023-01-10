@@ -42,4 +42,16 @@
         </where>
         order by create_time desc
     </select>
+    <select id="queryCompanyById" resultType="com.gxcata.questionnaireinvestigation.vo.QueryCompanyByIdVO">
+        select
+            company_id,
+            company_name,
+            company_nature_code,
+            GET_DICT_NAME(company_nature_code) as company_nature_name,
+            create_time,
+            update_time
+        from c_company
+        where
+            company_id = #{companyId}
+    </select>
 </mapper>
