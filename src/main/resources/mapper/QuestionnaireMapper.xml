@@ -50,7 +50,7 @@
             q_questionnaire a
         left join c_company b on a.company_id = b.company_id
         left join p_project c on a.project_id = c.project_id
-        left join s_system d on a.company_id = d.company_id
+        left join s_system d on a.system_id = d.system_id
         where
             a.generate_status_code = #{generateStatusCode}
             <if test="questionnaireName != null and questionnaireName != ''">
