@@ -24,7 +24,7 @@ public class AddQuestionPO {
     @NotEmpty(message = "问题类型不能为空")
     private String questionTypeCode;
 
-    @ApiModelProperty(value = "问卷id",hidden = true)
+    @ApiModelProperty(value = "问卷id")
     private String questionnaireId;
 
     @ApiModelProperty(value = "状态类型",hidden = true)

@@ -4,6 +4,7 @@ package com.gxcata.questionnaireinvestigation.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.gxcata.questionnaireinvestigation.entity.QQuestion;
 import com.gxcata.questionnaireinvestigation.po.AddQuestionPO;
+import com.gxcata.questionnaireinvestigation.po.DeleteQuestionPO;
 import com.gxcata.questionnaireinvestigation.po.QueryQuestionnaireByIdPO;
 import com.gxcata.questionnaireinvestigation.po.UpdateQuestionPO;
 import com.gxcata.questionnaireinvestigation.vo.QuestionVO;
@@ -37,4 +38,11 @@ public interface QuestionMapper extends BaseMapper<QQuestion> {
      * @return
      */
     List<QuestionVO> queryByQuestionnaireId(QueryQuestionnaireByIdPO queryQuestionnaireByIdPO);
+
+    /**
+     * 删除问题
+     * @param deleteQuestionPO
+     * @return
+     */
+    int deleteQuestion(DeleteQuestionPO deleteQuestionPO);
 }

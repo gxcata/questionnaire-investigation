@@ -32,6 +32,9 @@
         where
             question_id=#{questionId}
     </update>
+    <delete id="deleteQuestion">
+        delete from q_question where question_id=#{questionId}
+    </delete>
     <select id="queryByQuestionnaireId" resultType="com.gxcata.questionnaireinvestigation.vo.QuestionVO">
         select
             question_id,

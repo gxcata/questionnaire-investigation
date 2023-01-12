@@ -90,81 +90,8 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public boolean update(UpdateQuestionnairePO updateQuestionnairePO) {
+
         updateQuestionnairePO.setUpdateTime(new Date());
-
-        if(CollUtil.isNotEmpty(updateQuestionnairePO.getList())){
-
-            for(UpdateQuestionPO questionPO : updateQuestionnairePO.getList()){
-                //新增
-                String id = IdUtil.objectId();
-                if(questionPO.getAddOrUpdate() == 0){
-
-                    List<AddQuestionPO> list = new ArrayList<>();
-                    AddQuestionPO addQuestionPO = new AddQuestionPO();
-                    //id
-                    addQuestionPO.setQuestionId(id);
-                    //问题
-                    addQuestionPO.setQuestionTitle(questionPO.getQuestionTitle());
-                    //问题类型
-                    addQuestionPO.setQuestionTypeCode(questionPO.getQuestionTypeCode());
-                    //问卷id
-                    addQuestionPO.setQuestionnaireId(updateQuestionnairePO.getQuestionnaireId());
-                    //状态类型
-                    addQuestionPO.setStatusCode(questionPO.getStatusCode());
-                    list.add(addQuestionPO);
-                    if(questionMapper.add(list) <= 0){
-                       throw new RRException(ErrorCodeEnum.ERROR_ADD);
-                    }
-
-                }else if(questionPO.getAddOrUpdate() == 1){
-                    //修改
-                    if(questionMapper.updateQuestion(questionPO) <= 0){
-                        throw new RRException(ErrorCodeEnum.ERROR_UPDATE);
-                    }
-
-                }else {
-                    throw new RRException(ErrorCodeEnum.ERROR_PARAM);
-                }
-
-
-                if(CollUtil.isNotEmpty(questionPO.getList())){
-
-                    for(UpdateOptionPO optionPO : questionPO.getList()){
-
-                        if(optionPO.getAddOrUpdate() == 0){
-
-                            //新增
-                            List<AddOptionPO> list = new ArrayList<>();
-                            AddOptionPO addOptionPO = new AddOptionPO();
-                            //id
-                            addOptionPO.setOptionId(IdUtil.objectId());
-                            //选项文案
-                            addOptionPO.setOptionValue(optionPO.getOptionValue());
-                            //问题id
-                            addOptionPO.setQuestionId(questionPO.getAddOrUpdate() == 0 ? id : questionPO.getQuestionId());
-                            //状态类型
-                            addOptionPO.setStatusCode(optionPO.getStatusCode());
-
-                            list.add(addOptionPO);
-                            if(optionMapper.add(list) <= 0){
-                               throw new RRException(ErrorCodeEnum.ERROR_ADD);
-                            }
-
-                        }else if(optionPO.getAddOrUpdate() == 1){
-                            //修改
-                            if(optionMapper.updateOption(optionPO) <= 0){
-                                throw new RRException(ErrorCodeEnum.ERROR_UPDATE);
-                            }
-
-                        }else{
-                            throw new RRException(ErrorCodeEnum.ERROR_PARAM);
-                        }
-
-                    }
-                }
-
-            }
-        }
 
         return questionnaireMapper.updateQuestionnaire(updateQuestionnairePO) > 0;
     }

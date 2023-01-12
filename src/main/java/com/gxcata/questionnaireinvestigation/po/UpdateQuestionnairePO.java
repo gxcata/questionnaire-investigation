@@ -33,7 +33,4 @@ public class UpdateQuestionnairePO {
     @ApiModelProperty(value = "修改时间",hidden = true)
     private Date updateTime;
 
-    @ApiModelProperty(value = "问题list")
-    private List<UpdateQuestionPO> list;
-
 }

@@ -26,9 +26,6 @@ public class UpdateQuestionPO {
     @NotEmpty(message = "状态code不能为空")
     private String statusCode;
 
-    @ApiModelProperty(value = "新增or修改（新增：0，修改：1）")
-    private int addOrUpdate;
-
     @ApiModelProperty(value = "选项list")
     private List<UpdateOptionPO> list;
 
