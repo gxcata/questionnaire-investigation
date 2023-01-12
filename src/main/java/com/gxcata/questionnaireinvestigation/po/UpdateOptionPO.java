@@ -3,7 +3,6 @@ package com.gxcata.questionnaireinvestigation.po;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import javax.validation.constraints.NotEmpty;
 
 /**
  * @author wanghailun
@@ -18,10 +17,9 @@ public class UpdateOptionPO {
     @ApiModelProperty(value = "选项文案")
     private String optionValue;
 
-    @ApiModelProperty(value = "问题id")
+    @ApiModelProperty(value = "问题id",hidden = true)
     private String questionId;
 
-    @ApiModelProperty(value = "状态code(启用：10000401；停用：10000402)",required = true)
-    @NotEmpty(message = "状态code不能为空")
+    @ApiModelProperty(value = "状态code(启用：10000401；停用：10000402)",hidden = true)
     private String statusCode;
 }

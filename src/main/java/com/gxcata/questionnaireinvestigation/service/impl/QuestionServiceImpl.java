@@ -1,7 +1,10 @@
 package com.gxcata.questionnaireinvestigation.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.IdUtil;
+import com.gxcata.questionnaireinvestigation.common.enums.StatusCodeEnum;
 import com.gxcata.questionnaireinvestigation.common.exception.RRException;
+import com.gxcata.questionnaireinvestigation.common.utils.StringUtils;
 import com.gxcata.questionnaireinvestigation.common.web.domain.ErrorCodeEnum;
 import com.gxcata.questionnaireinvestigation.mapper.OptionMapper;
 import com.gxcata.questionnaireinvestigation.mapper.QuestionMapper;
@@ -40,6 +43,11 @@ public class QuestionServiceImpl implements QuestionService {
         for(UpdateOptionPO updateOptionPO : updateOptionList){
             AddOptionPO addOptionPO = new AddOptionPO();
             BeanUtil.copyProperties(updateOptionPO,addOptionPO);
+            if(StringUtils.isEmpty(addOptionPO.getOptionId())){
+                addOptionPO.setOptionId(IdUtil.objectId());
+            }
+            addOptionPO.setQuestionId(updateQuestionPO.getQuestionId());
+            addOptionPO.setStatusCode(StatusCodeEnum.ENABLE.getVal());
             addOptionList.add(addOptionPO);
         }
 
