@@ -3,6 +3,7 @@ package com.gxcata.questionnaireinvestigation.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.IdUtil;
 import com.gxcata.questionnaireinvestigation.common.enums.GenerateStatusEnum;
+import com.gxcata.questionnaireinvestigation.common.enums.QuestionTypeEnum;
 import com.gxcata.questionnaireinvestigation.common.enums.StatusCodeEnum;
 import com.gxcata.questionnaireinvestigation.common.exception.RRException;
 import com.gxcata.questionnaireinvestigation.common.web.domain.ErrorCodeEnum;
@@ -190,6 +191,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         if(CollUtil.isNotEmpty(questionList)){
             //遍历问题数组
             for (QuestionVO questionVO : questionList){
+                if(questionVO.getQuestionTypeCode().equals(QuestionTypeEnum.QUESTION_AND_ANSWERS.getVal())){
+                    continue;
+                }
                 //获取选项list
                 List<OptionVO> optionList = questionVO.getList();
                 //判空
@@ -207,6 +211,9 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
         if(CollUtil.isNotEmpty(answerList)){
             List<StatisticsQuestionVO> statisticsQuestionList = new ArrayList<>();
             for(QuestionVO questionVO : questionList){
+                if(questionVO.getQuestionTypeCode().equals(QuestionTypeEnum.QUESTION_AND_ANSWERS.getVal())){
+                    continue;
+                }
                 StatisticsQuestionVO statisticsQuestionVO = new StatisticsQuestionVO();
                 statisticsQuestionVO.setQuestionId(questionVO.getQuestionId());
                 statisticsQuestionVO.setQuestionTitle(questionVO.getQuestionTitle());
