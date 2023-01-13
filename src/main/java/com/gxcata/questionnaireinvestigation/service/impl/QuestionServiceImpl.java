@@ -60,8 +60,22 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Boolean add(AddQuestionPO addQuestionPO) {
-        List<AddQuestionPO> list = new ArrayList<>();
+        String id = IdUtil.objectId();
+        addQuestionPO.setQuestionId(id);
+        addQuestionPO.setStatusCode(StatusCodeEnum.ENABLE.getVal());
+        List<AddQuestionPO> list = new ArrayList<>(1);
         list.add(addQuestionPO);
+        List<AddOptionPO> addOptionList = addQuestionPO.getList();
+        for(AddOptionPO po :addOptionList){
+            po.setStatusCode(StatusCodeEnum.ENABLE.getVal());
+            po.setQuestionId(id);
+            po.setOptionId(IdUtil.objectId());
+        }
+        if(optionMapper.add(addOptionList) <= 0){
+            throw new RRException(ErrorCodeEnum.ERROR_ADD);
+        }
+
+
         return questionMapper.add(list) > 0;
     }
 

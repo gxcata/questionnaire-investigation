@@ -19,7 +19,7 @@ public class AddOptionPO {
     @NotEmpty(message = "选项文案不能为空")
     private String optionValue;
 
-    @ApiModelProperty(value = "问题id")
+    @ApiModelProperty(value = "问题id",hidden = true)
     private String questionId;
 
     @ApiModelProperty(value = "状态类型",hidden = true)

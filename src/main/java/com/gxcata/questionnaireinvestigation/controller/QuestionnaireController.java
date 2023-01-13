@@ -56,7 +56,7 @@ public class QuestionnaireController extends BaseController {
         return Result.ok(questionnaireService.update(updateQuestionnairePO));
     }
 
-    @UserLoginToken
+
     @PostMapping("/queryById")
     @ApiOperation(value = "根据id查询问卷详情")
     public Result<QueryQuestionnaireByIdVO> queryById(@RequestBody @Valid QueryQuestionnaireByIdPO queryQuestionnaireByIdPO) {

@@ -133,7 +133,7 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
             for(String id : questionIds){
                 Map<String,Object> map1 = new HashMap<>();
                 map1.put("question_id",id);
-                List<QOption> qOptions = optionMapper.selectByMap(map);
+                List<QOption> qOptions = optionMapper.selectByMap(map1);
                 if(CollUtil.isNotEmpty(qOptions)){
                     optionIdList.addAll(qOptions.stream().map(QOption::getOptionId).collect(Collectors.toList()));
                 }
