@@ -8,12 +8,14 @@ spring:
     url: jdbc:mysql://192.168.1.170:3306/questionnaire_investigation?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
     username: root
     password: ENC(SSFtvTVLTlyiqvAsJ/syVg==)
+#    username: gxcata
+#    password: ppnn13%dkstFeb.1st
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
   main:
-#    allow-circular-references: true
+    #    allow-circular-references: true
     allow-bean-definition-overriding: true
   servlet:
     multipart:
@@ -33,12 +35,12 @@ mybatis:
 
 pagehelper:
   helper-dialect: mysql
-  #ÉèÖÃÎªtrueÊ±£¬pageNum<=0Ê±»á²éÑ¯µÚÒ»Ò³£¬pageNum>pagesÊ±»á²éÑ¯×îºóÒ»Ò³
+  #ï¿½ï¿½ï¿½ï¿½ÎªtrueÊ±ï¿½ï¿½pageNum<=0Ê±ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½Ò»Ò³ï¿½ï¿½pageNum>pagesÊ±ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½Ò»Ò³
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
 
-# ´òÓ¡sql
+# ï¿½ï¿½Ó¡sql
 logging:
   level:
     com.officialwebsite.mapper : debug
