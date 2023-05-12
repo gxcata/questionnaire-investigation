@@ -1,5 +1,7 @@
 package com.gxcata.questionnaireinvestigation.controller;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.util.ObjectUtil;
 import com.gxcata.questionnaireinvestigation.common.jwt.UserLoginToken;
 import com.gxcata.questionnaireinvestigation.common.web.domain.Result;
 import com.gxcata.questionnaireinvestigation.common.web.page.BaseController;
@@ -34,8 +36,17 @@ public class QuestionnaireController extends BaseController {
     private QuestionnaireService questionnaireService;
 
     @UserLoginToken
+    @PostMapping("/addTemplate")
+    @ApiOperation(value = "新增问卷模板")
+    public Result<Boolean> addTemplate(@RequestBody @Valid AddQuestionnaireTemplatePO addQuestionnaireTemplatePO) {
+        AddQuestionnairePO addQuestionnairePO = new AddQuestionnairePO();
+        BeanUtil.copyProperties(addQuestionnairePO,addQuestionnaireTemplatePO);
+        return Result.ok(questionnaireService.add(addQuestionnairePO));
+    }
+
+    @UserLoginToken
     @PostMapping("/add")
-    @ApiOperation(value = "新增问卷or模板")
+    @ApiOperation(value = "新增问卷")
     public Result<Boolean> add(@RequestBody @Valid AddQuestionnairePO addQuestionnairePO) {
         return Result.ok(questionnaireService.add(addQuestionnairePO));
     }
