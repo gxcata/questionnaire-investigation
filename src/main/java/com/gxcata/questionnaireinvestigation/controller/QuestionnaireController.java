@@ -40,7 +40,11 @@ public class QuestionnaireController extends BaseController {
     @ApiOperation(value = "新增问卷模板")
     public Result<Boolean> addTemplate(@RequestBody @Valid AddQuestionnaireTemplatePO addQuestionnaireTemplatePO) {
         AddQuestionnairePO addQuestionnairePO = new AddQuestionnairePO();
-        BeanUtil.copyProperties(addQuestionnairePO,addQuestionnaireTemplatePO);
+        addQuestionnairePO.setQuestionnaireName(addQuestionnaireTemplatePO.getQuestionnaireName());
+        addQuestionnairePO.setQuestionnaireHead(addQuestionnaireTemplatePO.getQuestionnaireHead());
+        addQuestionnairePO.setIsTemplate(0);
+        addQuestionnairePO.setList(addQuestionnaireTemplatePO.getList());
+
         return Result.ok(questionnaireService.add(addQuestionnairePO));
     }
 

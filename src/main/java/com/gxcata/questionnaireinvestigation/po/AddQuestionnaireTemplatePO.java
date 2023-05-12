@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +24,7 @@ public class AddQuestionnaireTemplatePO {
     @ApiModelProperty(value = "问卷头")
     private String questionnaireHead;
 
-    @ApiModelProperty(value = "是否为模板（0：是，1：不是）",required = true)
-    @NotNull(message = "isTemplate不能为空！")
+    @ApiModelProperty(value = "是否为模板（0：是，1：不是）",hidden = true)
     private Integer isTemplate;
 
     @ApiModelProperty(value = "创建时间",hidden = true)
