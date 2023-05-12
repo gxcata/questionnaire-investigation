@@ -38,8 +38,7 @@ public class AddQuestionnairePO {
     @ApiModelProperty(value = "问卷头")
     private String questionnaireHead;
 
-    @ApiModelProperty(value = "是否为模板（0：是，1：不是）",required = true)
-    @NotNull(message = "isTemplate不能为空！")
+    @ApiModelProperty(value = "是否为模板（0：是，1：不是）",hidden = true)
     private Integer isTemplate;
 
     @ApiModelProperty(value = "创建时间",hidden = true)
