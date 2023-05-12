@@ -47,7 +47,6 @@ public class QuestionnaireServiceImpl implements QuestionnaireService {
 
     @Override
     public Boolean add(AddQuestionnairePO addQuestionnairePO) {
-        addQuestionnairePO.setIsTemplate(1);
         //生成id
         addQuestionnairePO.setQuestionnaireId(IdUtil.objectId());
         //创建时间

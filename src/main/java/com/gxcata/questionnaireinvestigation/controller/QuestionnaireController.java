@@ -52,6 +52,7 @@ public class QuestionnaireController extends BaseController {
     @PostMapping("/add")
     @ApiOperation(value = "新增问卷")
     public Result<Boolean> add(@RequestBody @Valid AddQuestionnairePO addQuestionnairePO) {
+        addQuestionnairePO.setIsTemplate(1);
         return Result.ok(questionnaireService.add(addQuestionnairePO));
     }
 
