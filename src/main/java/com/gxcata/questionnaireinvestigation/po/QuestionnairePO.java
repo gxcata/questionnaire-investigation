@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author wanghailun
@@ -24,7 +25,7 @@ public class QuestionnairePO extends PageDomain {
     private String generateStatusCode;
 
     @ApiModelProperty(value = "是否为模板（0：是，1：不是）",required = true)
-    @NotEmpty(message = "isTemplate不能为空！")
+    @NotNull(message = "isTemplate不能为空！")
     private Integer isTemplate;
 
 }
