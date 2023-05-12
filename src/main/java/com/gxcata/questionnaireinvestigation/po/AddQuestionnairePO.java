@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.crypto.Mac;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class AddQuestionnairePO {
     private String questionnaireHead;
 
     @ApiModelProperty(value = "是否为模板（0：是，1：不是）",required = true)
-    @NotEmpty(message = "isTemplate不能为空！")
+    @NotNull(message = "isTemplate不能为空！")
     private Integer isTemplate;
 
     @ApiModelProperty(value = "创建时间",hidden = true)
