@@ -23,4 +23,8 @@ public class QuestionnairePO extends PageDomain {
     @NotEmpty(message = "生成状态code不能为空")
     private String generateStatusCode;
 
+    @ApiModelProperty(value = "是否为模板（0：是，1：不是）",required = true)
+    @NotEmpty(message = "isTemplate不能为空！")
+    private Integer isTemplate;
+
 }

@@ -3,6 +3,7 @@ package com.gxcata.questionnaireinvestigation.po;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.crypto.Mac;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +33,13 @@ public class AddQuestionnairePO {
     @ApiModelProperty(value = "系统id",required = true)
     @NotEmpty(message = "系统id不能为空")
     private String systemId;
+
+    @ApiModelProperty(value = "问卷头")
+    private String questionnaireHead;
+
+    @ApiModelProperty(value = "是否为模板（0：是，1：不是）",required = true)
+    @NotEmpty(message = "isTemplate不能为空！")
+    private Integer isTemplate;
 
     @ApiModelProperty(value = "创建时间",hidden = true)
     private Date createTime;

@@ -45,6 +45,12 @@ public class QueryQuestionnaireByIdVO {
     @ApiModelProperty(value = "生成的url")
     private String generatedUrl;
 
+    @ApiModelProperty(value = "问卷头")
+    private String questionnaireHead;
+
+    @ApiModelProperty(value = "是否为模板（0：是，1：不是）")
+    private Integer isTemplate;
+
     @ApiModelProperty(value = "问题list")
     private List<QuestionVO> list;
 

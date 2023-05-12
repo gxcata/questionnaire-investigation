@@ -35,7 +35,7 @@ public class QuestionnaireController extends BaseController {
 
     @UserLoginToken
     @PostMapping("/add")
-    @ApiOperation(value = "新增问卷")
+    @ApiOperation(value = "新增问卷or模板")
     public Result<Boolean> add(@RequestBody @Valid AddQuestionnairePO addQuestionnairePO) {
         return Result.ok(questionnaireService.add(addQuestionnairePO));
     }
@@ -43,7 +43,7 @@ public class QuestionnaireController extends BaseController {
 
     @UserLoginToken
     @PostMapping("/query")
-    @ApiOperation(value = "根据状态查询问卷列表")
+    @ApiOperation(value = "根据状态查询问卷or模板列表")
     public Result<List<QuestionnaireVO>> query(@RequestBody @Valid QuestionnairePO questionnairePO) {
         startPage();
         return getDataTable(questionnaireService.query(questionnairePO));
@@ -58,14 +58,14 @@ public class QuestionnaireController extends BaseController {
 
 
     @PostMapping("/queryById")
-    @ApiOperation(value = "根据id查询问卷详情")
+    @ApiOperation(value = "根据id查询问卷or模板详情")
     public Result<QueryQuestionnaireByIdVO> queryById(@RequestBody @Valid QueryQuestionnaireByIdPO queryQuestionnaireByIdPO) {
         return Result.ok(questionnaireService.queryById(queryQuestionnaireByIdPO));
     }
 
     @UserLoginToken
     @PostMapping("/delete")
-    @ApiOperation(value = "删除问卷")
+    @ApiOperation(value = "删除问卷or模板")
     public Result<Boolean> delete(@RequestBody @Valid DeleteQuestionnairePO deleteQuestionnairePO) {
         return Result.ok(questionnaireService.delete(deleteQuestionnairePO));
     }

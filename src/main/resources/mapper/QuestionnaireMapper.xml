@@ -4,8 +4,8 @@
 <mapper namespace="com.gxcata.questionnaireinvestigation.mapper.QuestionnaireMapper">
 
     <insert id="add">
-        insert into q_questionnaire(questionnaire_id, questionnaire_name, company_id, project_id, system_id, create_time)
-        values (#{questionnaireId},#{questionnaireName},#{companyId},#{projectId},#{systemId},#{createTime})
+        insert into q_questionnaire(questionnaire_id, questionnaire_name, company_id, project_id, system_id, questionnaire_head, is_template, create_time)
+        values (#{questionnaireId},#{questionnaireName},#{companyId},#{projectId},#{systemId},#{questionnaireHead},#{isTemplate},#{createTime})
     </insert>
     <update id="updateQuestionnaire">
         update q_questionnaire
@@ -21,6 +21,9 @@
         </if>
         <if test="systemId != null and systemId != ''">
             system_id = #{systemId},
+        </if>
+        <if test="questionnaireHead != null and questionnaireHead != ''">
+            questionnaire_head = #{questionnaireHead},
         </if>
             update_time = #{updateTime}
         where questionnaire_id = #{questionnaireId}
@@ -45,6 +48,8 @@
             a.generate_status_code,
             GET_DICT_NAME(a.generate_status_code) as generate_status_name,
             a.generated_url,
+            a.questionnaire_head,
+            a.is_template,
             a.create_time
         from
             q_questionnaire a
@@ -53,12 +58,14 @@
         left join s_system d on a.system_id = d.system_id
         where
             a.generate_status_code = #{generateStatusCode}
-            <if test="questionnaireName != null and questionnaireName != ''">
-                and a.questionnaire_name = #{questionnaireName}
-            </if>
-            <if test="generateStatusCode != null and generateStatusCode != ''">
-                and a.generate_status_code = #{generateStatusCode}
-            </if>
+        and
+            a.is_template = #{isTemplate}
+        <if test="questionnaireName != null and questionnaireName != ''">
+            and a.questionnaire_name = #{questionnaireName}
+        </if>
+        <if test="generateStatusCode != null and generateStatusCode != ''">
+            and a.generate_status_code = #{generateStatusCode}
+        </if>
         order by a.create_time desc
     </select>
     <select id="queryById" resultType="com.gxcata.questionnaireinvestigation.vo.QueryQuestionnaireByIdVO">
@@ -74,6 +81,8 @@
             a.generate_status_code,
             GET_DICT_NAME(a.generate_status_code) as generate_status_name,
             a.generated_url,
+            a.questionnaire_head,
+            a.is_template,
             a.create_time
         from
             q_questionnaire a

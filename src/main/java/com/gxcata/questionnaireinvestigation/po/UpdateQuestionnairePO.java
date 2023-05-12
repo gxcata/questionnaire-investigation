@@ -30,6 +30,9 @@ public class UpdateQuestionnairePO {
     @ApiModelProperty(value = "问卷名称")
     private String questionnaireName;
 
+    @ApiModelProperty(value = "问卷头")
+    private String questionnaireHead;
+
     @ApiModelProperty(value = "修改时间",hidden = true)
     private Date updateTime;
 

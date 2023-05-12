@@ -6,7 +6,6 @@ import com.gxcata.questionnaireinvestigation.po.*;
 import com.gxcata.questionnaireinvestigation.vo.QueryQuestionnaireByIdVO;
 import com.gxcata.questionnaireinvestigation.vo.QuestionnaireVO;
 import org.mapstruct.Mapper;
-import org.omg.CORBA.INTERNAL;
 
 import java.util.List;
 

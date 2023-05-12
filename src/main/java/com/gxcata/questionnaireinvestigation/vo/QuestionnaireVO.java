@@ -33,6 +33,12 @@ public class QuestionnaireVO {
     @ApiModelProperty(value = "系统名称")
     private String systemName;
 
+    @ApiModelProperty(value = "问卷头")
+    private String questionnaireHead;
+
+    @ApiModelProperty(value = "是否为模板（0：是，1：不是）")
+    private Integer isTemplate;
+
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
 
